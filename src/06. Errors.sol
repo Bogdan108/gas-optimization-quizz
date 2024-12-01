@@ -17,9 +17,19 @@ contract Errors is IErrors {
 
     function call() public view onlyOwner {}
 }
+error NoAccess();
 
 contract ErrorsOptimized is IErrors {
-    /* YOUR SOLUTION GOES HERE */
+    address immutable owner;
 
-    function call() public view {}
+    modifier onlyOwner() {
+        if (owner != msg.sender) revert NoAccess();
+        _;
+    }
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function call() public view onlyOwner {}
 }

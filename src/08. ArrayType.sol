@@ -14,7 +14,13 @@ contract ArrayType is IArrayType {
 }
 
 contract ArrayTypeOptimized is IArrayType {
-    /* YOUR SOLUTION GOES HERE */
+    uint8[] array;
 
-    function initArray() public {}
+    function initArray() public {
+        uint8[] memory tempArray = new uint8[](200);
+        for (uint8 i; i < 200; ++i) {
+            tempArray[i] = i;
+        }
+        array = tempArray;
+    }
 }
