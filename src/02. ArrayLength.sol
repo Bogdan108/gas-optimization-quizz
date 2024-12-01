@@ -18,10 +18,8 @@ contract ArrayLengthOptimized is IArrayLength {
 
     function callFor() public view {
         uint256 length = myArray.length;
-        for (uint256 i; i < length; ) {
-            unchecked {
-                i += 2;
-            }
+        for (uint8 i; i < length; ) {
+            i += 2;
         }
     }
 }

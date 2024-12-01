@@ -2,12 +2,16 @@
 pragma solidity ^0.8.25;
 
 import "./Interfaces.sol";
+error UnderflowError();
 
 contract Addition is IAddition {
     uint256 number = 1;
 
     function addition(uint256 value) public {
-        number += value;
+        if (value > type(uint256).max - number) revert UnderflowError();
+        unchecked {
+            number += value;
+        }
     }
 }
 
@@ -15,7 +19,10 @@ contract Subtraction is ISubtraction {
     uint256 number = 100;
 
     function subtraction(uint256 value) public {
-        number -= value;
+        if (value > number) revert UnderflowError();
+        unchecked {
+            number -= value;
+        }
     }
 }
 
